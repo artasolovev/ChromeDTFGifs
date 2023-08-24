@@ -1,0 +1,95 @@
+.thesis__gif {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+@media (hover: hover) {
+    .thesis__gif:hover {
+        background-color:#f2f2f2
+    }
+}
+
+/* .thesis__gif--active .gif__form {
+    visibility: visible;
+} */
+
+.gif__form {
+    visibility: hidden;
+    display: none;
+    flex-direction: column;
+}
+#gif-form {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+input[class="gif_search"] {
+    width: -webkit-fill-available;
+    padding-right: 50px;
+    font-size: 16px;
+    line-height: 32px;
+    height: 30px;
+    padding: 0 8px;
+    border: solid;
+    border-radius:10px;
+    border-color: #dfecff
+}
+
+input[class="gif_search"]:focus {
+    border-color: #4086E0;
+    transition: border-color .1s linear
+}
+
+button[class="gif_submit"] {
+    position: absolute;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: -40px;
+    visibility: hidden;
+}
+
+.gif_image_url {
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-transition: -webkit-box-shadow .15s ease-out;
+    transition: -webkit-box-shadow .15s ease-out;
+    transition: box-shadow .15s ease-out;
+    transition: box-shadow .15s ease-out,-webkit-box-shadow .15s ease-out;
+}
+
+.gif_results_container {
+    height: 500px;
+    width: -webkit-fill-available;
+    display: grid;
+    overflow: auto;
+    grid-template-columns: repeat(3, minmax(175px, 1fr));
+    grid-template-rows: repeat(3, minmax(175px, 1fr));
+    grid-auto-rows: minmax(175px, 1fr);
+    gap: 0px 0px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.gif_image_url {
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    border: solid;
+    margin: 15px;
+    border-radius: 10px;
+    border-color: lightsteelblue;
+}
+
+.gif_image_url:hover {
+    box-shadow: 0 0 11px rgba(89, 171, 239, 0.645); 
+  }

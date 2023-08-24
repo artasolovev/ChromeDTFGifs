@@ -1,0 +1,26 @@
+{
+    "name": "DTF comments with Tenor",
+    "description": "Add Tenor to DTF comments",
+    "version": "0.1",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "css": ["styles/giphy_dtf_styles.css"],
+            "matches": ["https://*.dtf.ru/*"],
+            "js":["scripts/render_gif_button.js"],
+            "run_at": "document_end"
+        }
+    ],
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting",
+        "tabs",
+        "webNavigation",
+        "webRequest"
+    ],
+    "host_permissions": ["https://*.dtf.ru/*"]
+}
