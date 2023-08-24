@@ -96,7 +96,7 @@ function fetchGiphs(e) {
         let dataArray = resp.results
         showGiphs(searchTerm, dataArray);
         document.querySelector(".gif_results_container").addEventListener('scroll', (event) => {
-          if (document.querySelector(".gif_results_container").offsetHeight + document.querySelector(".gif_results_container").scrollTop == document.querySelector(".gif_results_container").scrollHeight) {
+          if (document.querySelector(".gif_results_container").offsetHeight + document.querySelector(".gif_results_container").scrollTop >= document.querySelector(".gif_results_container").scrollHeight) {
             let search_url = "https://tenor.googleapis.com/v2/search?q=" + searchTerm + "&key=" +
             apikey +"&client_key=" + clientkey +  "&pos=" + nextPos + "&locale=" + lang;
             fetch(search_url)
