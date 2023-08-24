@@ -10,41 +10,6 @@ chrome.runtime.onMessage.addListener(
     }
 });
 
-function buttonListenerCallback() {
-  if (document.getElementsByClassName("thesis__gif")[0]) {
-    var gifButton = document.getElementsByClassName("thesis__gif")[0]
-    gifButton.addEventListener('click', (event) => {
-      event.preventDefault();
-      console.log('click on gifbutton')
-      visibleProperty();
-    });
-  }
-}
-
-function visibleProperty() {
-  var formNode = document.getElementsByClassName('gif__form')[0]
-  if (formNode.style.visibility =='visible' && formNode.style.display == 'flex') {
-    formNode.style.visibility = 'hidden';
-    formNode.style.display = 'none';
-    cleanResultAll()
-  }
-  else {
-    formNode.style.visibility = 'visible';
-    formNode.style.display = 'flex';
-  }
-}
-
-function setGIFForm() {
-  var commentsNode = document.getElementsByClassName('comment-form__editor')[0]
-  // Create DOM element
-  const gifForm = document.createElement("div");
-  // gifForm.innerHTML = ('<form id="gif-form"><input type="text" class="gif_search" placeholder="Какую гифку ищем?"><input type="submit" class="gif_submit" value="Поиск"></form><div class="results"></div>')
-  gifForm.innerHTML = ('<form id="gif-form"><input type="text" class="gif_search" placeholder="Какую гифку ищем?"><button type="submit" class="gif_submit"></button></form><div class="results"></div>')
-  gifForm.classList.add("gif__form");
-  //Add element to DOM
-  commentsNode.appendChild(gifForm);
-}
-
 function setGIFButton() {
   if (document.getElementsByClassName('thesis__gif').length === 0) {
     if (document.getElementsByClassName('thesis__attaches')[0] === undefined) {
@@ -68,10 +33,45 @@ function setGIFButton() {
     }
 }
 
+function buttonListenerCallback() {
+  if (document.getElementsByClassName("thesis__gif")[0]) {
+    var gifButton = document.getElementsByClassName("thesis__gif")[0]
+    gifButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      console.log('click on gifbutton')
+      visibleProperty();
+    });
+  }
+}
+
 function submitGIF() {
   if (document.querySelector("#gif-form")) {
     const gifForm = document.querySelector("#gif-form");
     gifForm.addEventListener("submit", fetchGiphs);
+  }
+}
+
+function setGIFForm() {
+  var commentsNode = document.getElementsByClassName('comment-form__editor')[0]
+  // Create DOM element
+  const gifForm = document.createElement("div");
+  // gifForm.innerHTML = ('<form id="gif-form"><input type="text" class="gif_search" placeholder="Какую гифку ищем?"><input type="submit" class="gif_submit" value="Поиск"></form><div class="results"></div>')
+  gifForm.innerHTML = ('<form id="gif-form"><input type="text" class="gif_search" placeholder="Какую гифку ищем?"><button type="submit" class="gif_submit"></button></form><div class="results"></div>')
+  gifForm.classList.add("gif__form");
+  //Add element to DOM
+  commentsNode.appendChild(gifForm);
+}
+
+function visibleProperty() {
+  var formNode = document.getElementsByClassName('gif__form')[0]
+  if (formNode.style.visibility =='visible' && formNode.style.display == 'flex') {
+    formNode.style.visibility = 'hidden';
+    formNode.style.display = 'none';
+    cleanResultAll()
+  }
+  else {
+    formNode.style.visibility = 'visible';
+    formNode.style.display = 'flex';
   }
 }
 
