@@ -4,22 +4,27 @@ chrome.runtime.onMessage.addListener(
     if (request.message === 'url_changed_complete') {
         if (request.status === "complete") {
           // inject GIF button
-          setTimeout(setGIFButton, 500)
+          setTimeout(setGIFButton, 1000)
           // render search form by GIF button click
-          setTimeout(buttonListenerCallback, 1000)
+          setTimeout(buttonListenerCallback, 1500)
           // render result element GIF by search element
-          setTimeout(submitGIF, 1500)
+          setTimeout(submitGIF, 2000)
+          setTimeout(answerClick,500)
         }
     }
 });
 
+function answerClick() {
+  if (document.querySelector('.comment__action')) {
+   
+  }
+}
+
 function setGIFButton() {
   if (document.getElementsByClassName('thesis__gif').length === 0) {
     if (document.getElementsByClassName('thesis__attaches')[0] === undefined) {
-      console.log('Attaches Node not fount');
     }
     else {
-      console.log('Attaches Node found ... button added')
       var commentsNode = document.getElementsByClassName('thesis__attaches')[0]
       // Create DOM element
       const gifButton = document.createElement("div");
@@ -32,7 +37,6 @@ function setGIFButton() {
     }
     else {
       buttonListenerCallback()
-      console.log('Element already exist!')
     }
 }
 
@@ -41,7 +45,6 @@ function buttonListenerCallback() {
     var gifButton = document.getElementsByClassName("thesis__gif")[0]
     gifButton.addEventListener('click', (event) => {
       event.preventDefault();
-      console.log('click on gifbutton')
       visibleProperty();
     });
   }

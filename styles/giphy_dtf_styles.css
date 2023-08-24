@@ -73,9 +73,9 @@ button[class="gif_submit"] {
     width: -webkit-fill-available;
     display: grid;
     overflow: auto;
-    grid-template-columns: repeat(3, minmax(175px, 1fr));
-    grid-template-rows: repeat(3, minmax(175px, 1fr));
-    grid-auto-rows: minmax(175px, 1fr);
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-rows: repeat(2, minmax(200px, 1fr));
+    grid-auto-rows: minmax(200px, 1fr);
     gap: 0px 0px;
     background-color: white;
     border-radius: 10px;
@@ -93,3 +93,11 @@ button[class="gif_submit"] {
 .gif_image_url:hover {
     box-shadow: 0 0 11px rgba(89, 171, 239, 0.645); 
   }
+
+/* @media (min-width: 400px) {
+  .gif_results_container {
+    grid-template-columns: repeat(2, minmax(175px, 1fr));
+    grid-template-rows: repeat(3, minmax(175px, 1fr));
+    grid-auto-rows: minmax(175px, 1fr);
+  }
+} */
