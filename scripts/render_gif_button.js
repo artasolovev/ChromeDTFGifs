@@ -1,10 +1,13 @@
+// listen for messages sent from background.js
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    // listen for messages sent from background.js
     if (request.message === 'url_changed_complete') {
         if (request.status === "complete") {
+          // inject GIF button
           setTimeout(setGIFButton, 500)
+          // render search form by GIF button click
           setTimeout(buttonListenerCallback, 1000)
+          // render result element GIF by search element
           setTimeout(submitGIF, 1500)
         }
     }
@@ -79,20 +82,46 @@ function fetchGiphs(e) {
     e.preventDefault();
     cleanResultAfterSubmin();
     const searchTerm = document.querySelector(".gif_search").value;
-    let lmt = 20
+    let lmt = 10
     let apikey = 'AIzaSyC0Yoa_3gzo0QDqmMDmq1PXw4gHU9us0ao'
     let clientkey = 'TenorDTF'
     let lang = 'ru'
     let search_url = "https://tenor.googleapis.com/v2/search?q=" + searchTerm + "&key=" +
             apikey +"&client_key=" + clientkey +  "&limit=" + lmt + "&locale=" + lang;
+    let nextPos = ''
     fetch(search_url)
     .then((response) => {return response.json(); })
     .then((resp => {
+        nextPos = resp.next
         let dataArray = resp.results
         showGiphs(searchTerm, dataArray);
+        document.querySelector(".gif_results_container").addEventListener('scroll', (event) => {
+          if (document.querySelector(".gif_results_container").offsetHeight + document.querySelector(".gif_results_container").scrollTop == document.querySelector(".gif_results_container").scrollHeight) {
+            let search_url = "https://tenor.googleapis.com/v2/search?q=" + searchTerm + "&key=" +
+            apikey +"&client_key=" + clientkey +  "&pos=" + nextPos + "&locale=" + lang;
+            fetch(search_url)
+            .then((response) => {return response.json(); })
+            .then((resp => {
+              nextPos = resp.next
+              let dataArray = resp.results
+              dataArray.forEach((imgData) => {
+                let elem = document.createElement('img')
+                elem.classList.add('gif_image_url')
+                elem.setAttribute('src', `${imgData.media_formats.nanogif.url}`)
+                elem.setAttribute('longdesc', `${imgData.media_formats.gif.url}`)
+                elem.setAttribute('alt', `${imgData.id}`)
+                elem.addEventListener("click", (event) => {
+                  addURLToTextBox(event.target.getAttribute('longdesc'))
+                  sendShare(searchTerm, event.target.getAttribute('alt'))
+                })
+                //output.appendChild(elem);
+                document.querySelector('.gif_results_container').append(elem);
+              });
+            }))
+          }
+        })
     }))
     .catch(err => console.log(err));
-
 }
 
 function sendShare(search_term,shared_gifs_id)
